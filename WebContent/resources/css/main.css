@@ -10,13 +10,19 @@
 	margin-left: 10px;
 }
 
+.valid {
+	font-size: small;
+	color: green;
+	margin-left: 10px;
+}
+
 .label {
 	text-align: right;
 	vertical-align: top;
 }
 
 .formtable {
-	widt: 400px;
+	widt: 600px;
 	padding: 10px;
 	border: 1px solid blue;
 }
@@ -28,4 +34,9 @@ input[type=text] {
 textarea {
 	width: 250px;
 	height: 300px;
+}
+
+table.offers {
+	padding: 20px;
+	border: 1px solid gray;
 }

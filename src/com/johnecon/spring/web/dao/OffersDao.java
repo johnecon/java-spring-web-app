@@ -13,11 +13,11 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component("offersDao")
-public class OffersDAO {
+public class OffersDao {
 
 	private NamedParameterJdbcTemplate jdbc;
 
-	public OffersDAO() {
+	public OffersDao() {
 		System.out.println("Successfully loaded Offers DAO");
 	}
 
@@ -54,5 +54,10 @@ public class OffersDAO {
 				return offer;
 			}
 		});
+	}
+
+	public void create(Offer offer) {
+		// TODO Auto-generated method stub
+		
 	}
 }

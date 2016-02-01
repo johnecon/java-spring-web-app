@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,9 +10,37 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<p>
+		<a href="${pageContext.request.contextPath}/offers">View current
+			offers</a>
+	</p>
+	<p>
+		<a href="${pageContext.request.contextPath}/createOffer">Create
+			offer</a>
+	</p>
+	<p>
+		<a href="<c:url value="/newAccount"/>">Create account</a>
+	</p>
 
-<p><a href="${pageContext.request.contextPath}/offers">View current offers</a></p>
-<p><a href="${pageContext.request.contextPath}/createOffer">Create offer</a></p>
+	<sec:authorize access="isAuthenticated()">
+		<form name='f' action='${pageContext.request.contextPath}/logout'
+			method='POST'>
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" /> <input name="submit" type="submit"
+				value="Logout" />
+		</form>
+	</sec:authorize>
+	<sec:authorize access="!isAuthenticated()">
+		<p>
+			<a href="${pageContext.request.contextPath}/login">Log in</a>
+		</p>
+	</sec:authorize>
+	<sec:authorize access="hasAuthority ('admin')">
+		<p>
+			<a href="${pageContext.request.contextPath}/admin">Admin</a>
+		</p>
+	</sec:authorize>
+
 
 
 

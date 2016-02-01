@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="john" authorities="admin"
+					password="john" />
+			</security:user-service>
+		</security:authentication-provider>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="dataSource" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/static/css/*"
+			access="permitAll" />
+			<security:intercept-url pattern="/static/script/*"
+			access="permitAll" />
+		<security:intercept-url pattern="/createAccount" access="permitAll" />
+		<security:intercept-url pattern="/admin"
+			access="hasAuthority ('admin')" />
+		<security:intercept-url pattern="/newAccount" access="permitAll" />
+		<security:intercept-url pattern="/loggedOut" access="permitAll" />
+		<security:intercept-url pattern="/logout" access="permitAll" />
+		<security:intercept-url pattern="/j_spring_security_logout" access="permitAll" />
+		<security:intercept-url pattern="/createOffer" access="isAuthenticated()" />
+		<security:intercept-url pattern="/doCreate" access="isAuthenticated()" />
+		<security:intercept-url pattern="/offerCreated" access="isAuthenticated()" />
+		<security:intercept-url pattern="/offers" access="permitAll" />
+		<security:intercept-url pattern="/login" access="isAnonymous()" />
+		<security:intercept-url pattern="/**" access="denyAll" />		
+		<security:form-login login-page="/login"
+			authentication-failure-url="/login?error=true"
+			default-target-url="/" always-use-default-target="true" />
+		<security:logout logout-success-url="/"/>
+	</security:http>
+	
+</beans>
+

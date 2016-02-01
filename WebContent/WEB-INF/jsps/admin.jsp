@@ -5,27 +5,30 @@
 <html>
 <head>
 <link href="${pageContext.request.contextPath}/static/css/main.css"
-	rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-	<table class="offers">
+	<h3>Administration area</h3>
+	<table class="formtable">
 		<tr>
-			<td>Name</td>
+			<td>Username</td>
 			<td>Email</td>
-			<td>Offer</td>
+			<td>Authority</td>
+			<td>Enabled</td>
 		</tr>
-		<c:forEach var="offer" items="${offers}">
+
+		<c:forEach var="user" items="${users}">
 			<tr>
-				<td><c:out value="${offer.name}"></c:out></td>
-				<td><c:out value="${offer.email}"></c:out></td>
-				<td><c:out value="${offer.text}"></c:out></td>
+				<td><c:out value="${user.username}"></c:out></td>
+				<td><c:out value="${user.email}"></c:out></td>
+				<td><c:out value="${user.authority}"></c:out></td>
+				<td><c:out value="${user.enabled}"></c:out></td>
 			</tr>
 		</c:forEach>
+
 	</table>
-	<p>
-		<a href="${pageContext.request.contextPath}/">Back</a>
-	</p>
 </body>
 </html>
