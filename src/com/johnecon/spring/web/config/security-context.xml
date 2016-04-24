@@ -7,14 +7,14 @@
 
 
 	<security:authentication-manager>
+		
 		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="john" authorities="admin"
-					password="john" />
-			</security:user-service>
-		</security:authentication-provider>
-		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="dataSource" />
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query='select * from users where binary username = ?'
+				authorities-by-username-query="select * from authorities where binary username = ?"
+				id="jdbcUsersService" />
+			<security:password-encoder ref="passwordEncoder">
+			</security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<security:http use-expressions="true">
@@ -25,8 +25,11 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/createAccount" access="permitAll" />
 		<security:intercept-url pattern="/admin"
-			access="hasAuthority ('admin')" />
+			access="permitAll" />
+		<!-- <security:intercept-url pattern="/admin"
+			access="hasAuthority ('ROLE_ADMIN')" /> -->
 		<security:intercept-url pattern="/newAccount" access="permitAll" />
+		<security:intercept-url pattern="/denied" access="permitAll" />
 		<security:intercept-url pattern="/loggedOut" access="permitAll" />
 		<security:intercept-url pattern="/logout" access="permitAll" />
 		<security:intercept-url pattern="/j_spring_security_logout" access="permitAll" />
@@ -40,7 +43,15 @@
 			authentication-failure-url="/login?error=true"
 			default-target-url="/" always-use-default-target="true" />
 		<security:logout logout-success-url="/"/>
+		<security:access-denied-handler error-page="/denied" />
+		<security:remember-me key="offersAppKey"
+			user-service-ref="jdbcUsersService" use-secure-cookie="false" />
 	</security:http>
-	
+
+	<security:global-method-security secured-annotations="enabled">
+	</security:global-method-security>
+	<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
+	</bean>
 </beans>
 

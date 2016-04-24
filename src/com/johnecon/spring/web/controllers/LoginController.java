@@ -42,6 +42,11 @@ public class LoginController {
 		return "loggedout";
 	}
 	
+	@RequestMapping("/denied")
+	public String showAccessDenied() {
+		return "accessdenied";
+	}
+	
 	@RequestMapping("/newAccount")
 	public String showNewAccount(Model model) {
 		model.addAttribute("user", new User());
@@ -53,7 +58,7 @@ public class LoginController {
 		if (result.hasErrors()) {
 			return "newaccount";
 		}
-		user.setAuthority("user");
+		user.setAuthority("ROLE_USER");
 		user.setEnabled(true);
 		
 		if (usersService.exists(user.getUsername())) {

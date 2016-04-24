@@ -54,12 +54,12 @@
 			</tr>
 			<tr>
 				<td class="label">Password:</td>
-				<td><sf:input id="pass" class="control" path="password" /><br />
+				<td><sf:input id="pass" type="password" class="control" path="password" /><br />
 					<sf:errors path="password" cssClass="error"></sf:errors></td>
 			</tr>
 			<tr>
 				<td class="label">Confirm Password:</td>
-				<td><input id="confirm-pass" class="control" path="confirmpass" /><br />
+				<td><input id="confirm-pass" type="password" class="control" path="confirmpass" /><br />
 					<div id="confirm-pass-message"></div></td>
 			</tr>
 			<tr>

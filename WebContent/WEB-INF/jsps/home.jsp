@@ -35,7 +35,7 @@
 			<a href="${pageContext.request.contextPath}/login">Log in</a>
 		</p>
 	</sec:authorize>
-	<sec:authorize access="hasAuthority ('admin')">
+	<sec:authorize access="hasAuthority ('ROLE_ADMIN')">
 		<p>
 			<a href="${pageContext.request.contextPath}/admin">Admin</a>
 		</p>
